@@ -60,10 +60,10 @@
 				</div>
 				<!-- Write Contract Starts -->
 				<span class="contact100-form-title">
-					Change Buy Fee
+					Change Buy Fee 
 				</span>
 				<div class="wrap-input100" >
-					<span class="label-input100">Buy Fee</span>
+					<span class="label-input100">Buy Fee (if fee = 1% then buy Fee = 1 and buy Divisor = 100 ; if Fee = 0.1% then buy fee = 1 and buy divisor = 1000 ; if fee = 1.6% then buy fee = 16 and buy divisor = 100 )</span>
 					<input class="input100" type="text" name="buyFee" id="buyFee" placeholder="Enter your Buy Fee">
 					<span class="focus-input100"></span>
 				</div>
@@ -75,7 +75,7 @@
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn">
+						<button onclick="changeBuyFee()" class="contact100-form-btn">
 							<span>
 								Make Change
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -89,19 +89,19 @@
 					Change Sell Fee
 				</span>
 				<div class="wrap-input100" >
-					<span class="label-input100">Buy Fee</span>
+					<span class="label-input100">Sell Fee  (if fee = 1% then sell Fee = 1 and sell Divisor = 100 ; if Fee = 0.1% then sell fee = 1 and sell divisor = 1000 ; if fee = 1.6% then sell fee = 16 and sell divisor = 100 )</span>
 					<input class="input100" type="text" name="sellFee" id="sellFee" placeholder="Enter your Sell Fee">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100" >
-					<span class="label-input100">Buy Divisor</span>
+					<span class="label-input100">Sell Divisor</span>
 					<input class="input100" type="text" name="sellDivisor" id="sellDivisor" placeholder="Enter your Sell Divisor">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn">
+						<button onclick="changeSellFee()" class="contact100-form-btn">
 							<span>
 								Make Change
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -115,14 +115,14 @@
 					Change Token Price
 				</span>
 				<div class="wrap-input100" >
-					<span class="label-input100">New Token Price</span>
+					<span class="label-input100">New Token Price - 1/Stable Price (Eg: if usd to inr price is 81 then 1/81 = 0.01234567901 then go to https://eth-converter.com and enter the value in eth and copy the wei and paste here 12345679010000000 )</span>
 					<input class="input100" type="text" name="tokenPrice" id="tokenPrice" placeholder="Enter your Token Price in WEI">
 					<span class="focus-input100"></span>
 				</div>
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn">
+						<button onclick="changeTokenPrice()" class="contact100-form-btn">
 							<span>
 								Make Change
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -143,7 +143,7 @@
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn">
+						<button onclick="withdrawBnb()" class="contact100-form-btn">
 							<span>
 								Make Change
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -164,7 +164,7 @@
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn">
+						<button onclick="withdrawToken()" class="contact100-form-btn">
 							<span>
 								Make Change
 								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
