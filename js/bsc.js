@@ -1,9 +1,9 @@
 
 function handleForm(event) { event.preventDefault(); } 
-// form.addEventListener('submit', handleForm);
+// document.getElementById('btn-connect').addEventListener('submit', handleForm);
 
-const contractAddress = "0xCe330c40339274B77e3fb7158062B2D1C465E857";
-const tokencontractAddress = "0x1D01D0B1A7B86f0DC2162b374ea52663E43E1750";
+const contractAddress = "0x9D07f13EB4E9b6D95Bf350aE73aEB9ec08b3e27B";
+const tokencontractAddress = "0xde4cf5280894cf36f790dddd137ba421334c434d";
 
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
@@ -123,8 +123,6 @@ async function fetchAccountData() {
     // clone.querySelector(".balance").textContent = humanFriendlyBalance;
     // accountContainer.appendChild(clone);
   });
-  calculateAll = setInterval(calculateToken, 1000);
-  calculateAll;
 
   // Because rendering account does its own RPC commucation
   // with Ethereum node, we do not want to display any results
@@ -229,9 +227,6 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
 });
 
-// window.onload = function() {            
-//     setInterval(calculateToken, 1000);
-// }
 
 console.log("ethers instance: ", ethers);
 
@@ -268,69 +263,6 @@ function truncate(input) {
   }
   return x;
 }
-
-async function calculateToken() {
-  const provider1 = new ethers.providers.Web3Provider(provider);
-
-  var contractInstance = new ethers.Contract(contractAddress,AbiOfContract,provider1);
-  var tokencontractInstance = new ethers.Contract(tokencontractAddress,tokenAbiOfContract,provider1);
-  var requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-
-  let price = [];
-  fetch("https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT", requestOptions)
-    .then(response => response.text())
-    .then(result => {price.push(JSON.parse(result).price); })
-    .catch(error => console.log('error', error));
-
-  // console.log(contractInstance);
-  (async () => {
-      // Modern dapp browsers...
-      if (provider) {
-          try {
-            var address = userAddress;
-      
-            var bnbCollected =  parseFloat((await contractInstance._weiRaised()/1e18)).toFixed(3)
-
-            document.getElementById("bnbCollected").innerHTML = bnbCollected;
-            // document.getElementById("bnbUsdRaised").innerHTML = parseFloat(bnbCollected * 418).toFixed(3);
-      
-            var remainingPercent = parseFloat((parseFloat(bnbCollected)/1000)*100).toFixed(2);
-            document.getElementById("filled").style.width = remainingPercent+"%";
-            document.getElementById("filled1").innerHTML = remainingPercent+"%";
-            var totalClaimed = parseFloat((await contractInstance.claimed(userAddress)/1e18)).toFixed(3) * await contractInstance._rate();
-            var totalContribution = parseFloat((totalClaimed)+(await contractInstance.checkContribution(userAddress)/1e18)).toFixed(3);
-        
-            var rate = parseInt((await contractInstance._rate()));
-            var tokenClaim = parseInt((await contractInstance.claimed(userAddress)));
-            var tokensClaimed = parseFloat((rate*(tokenClaim)/1e18)).toFixed(3);
-            var tokensUnclaimed = parseFloat((await contractInstance.checkContribution(userAddress)/1e18)).toFixed(3); 
-            
-            var bnbValue = (document.getElementById("bnb").value);
-
-
-            document.getElementById("checkContribution").innerHTML = totalContribution;
-            document.getElementById("tokenUnclaimed").innerHTML = tokensUnclaimed;
-            document.getElementById("claimed").innerHTML = tokensClaimed;
-            document.getElementById("token").value = rate*bnbValue;
-           
-
-              
-          } catch (error) {
-              console.log(error);
-          }
-
-      }
-
-      // Non-dapp browsers...
-      else {
-          document.getElementById("priceToken").value = "Connect to Wallet";
-      }
-  })();
-}
-
 
 
 
